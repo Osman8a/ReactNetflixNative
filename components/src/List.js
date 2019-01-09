@@ -8,12 +8,17 @@ import {
 } from 'react-native';
 import { movieOne, movieTwo } from '../../config'
 
+/**
+ * @class List muestra las dos listas horizontales
+ * @extends {Component}
+ */
 class List extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
 
+    /**
+     * @param {*} item posición del vector
+     * @returns el componente Image una imagen
+     * @memberof List
+     */
     _renderItem(item) {
         return (
             <Image
@@ -39,10 +44,10 @@ class List extends Component {
                     <Text style={styles.text}>Top pic for you</Text>
                     <FlatList
                         horizontal
-                        ItemSeparatorComponent={() => <View style={styles.separator} />}
-                        keyExtractor={(item) => item.id}
-                        renderItem={({ item }) => this._renderItem(item)}
-                        data={movieTwo.reverse()}
+                        ItemSeparatorComponent={() => <View style={styles.separator} />} //separador
+                        keyExtractor={(item) => item.id} //key
+                        renderItem={({ item }) => this._renderItem(item)} //renderiza los elementos
+                        data={movieTwo.reverse()} //el vector a renderizar
                     />
                 </View>
             </View>

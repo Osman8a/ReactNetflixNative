@@ -1,5 +1,4 @@
-
-
+//movieTwo y movieOne son vectores de películas
 const movieTwo = [
     {
        "key":1,
