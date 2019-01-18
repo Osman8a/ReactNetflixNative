@@ -31,7 +31,7 @@ class List extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <View>
-                    <Text style={styles.text}>My list</Text>
+                    <Text style={styles.text}>Mi Lista</Text>
                     <FlatList
                         horizontal
                         ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -41,7 +41,7 @@ class List extends Component {
                     />
                 </View>
                 <View>
-                    <Text style={styles.text}>Top pic for you</Text>
+                    <Text style={styles.text}>Top recomendadas para ti</Text>
                     <FlatList
                         horizontal
                         ItemSeparatorComponent={() => <View style={styles.separator} />} //separador
