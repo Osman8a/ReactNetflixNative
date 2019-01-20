@@ -2,13 +2,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import SideMenu from 'react-native-side-menu';
-import List from './components/src/List';
-import Slide from './components/src/Slider'
-import Header from './components/src/Header'
-import Menu from './components/src/Menu'
+import List from './List';
+import Slide from './Slider'
+import Header from './Header'
+import Menu from './Menu'
 
 
 export default class App extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
@@ -48,9 +49,9 @@ export default class App extends Component {
           onChange={(isOpen) => this.updateMenu(isOpen)}
         >
           <ScrollView style={[{ flex: 1 }, styles.container]}>
-            <Header toogle={this.toggle.bind(this)} />
+            <Header navigator={this.props.navigator} toogle={this.toggle.bind(this)} />
             <Slide />
-            <List />
+            <List navigator={this.props.navigator} />
           </ScrollView>
         </SideMenu>
       </View>

@@ -15,6 +15,21 @@ import { movieOne, movieTwo } from '../../config'
 class List extends Component {
 
     /**
+     *
+     * @function newPushContent renderiza la vista de 
+     * Details 
+     * @param {*} item elemento a renderizar
+     * @memberof List
+     */
+    newPushContent(item) {
+        this.props.navigator.push({
+            ident: 'Details',
+            passProps: {
+                item
+            }
+        })
+    }
+    /**
      * @param {*} item posición del vector
      * @returns el componente Image una imagen
      * @memberof List

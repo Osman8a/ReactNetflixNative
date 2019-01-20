@@ -21,11 +21,13 @@ const Header = props => (
             style={styles.logo}
             source={require('../images/Netflix-logo.png')}
         />
-        <Icon
-            name="search"
-            color="white"
-            size={25}
-        />
+        <TouchableWithoutFeedback onPress={() => props.navigator.push({ ident: 'Search' })}>
+            <Icon
+                name="search"
+                color="white"
+                size={25}
+            />
+        </TouchableWithoutFeedback>
     </View>
 )
 
