@@ -4,7 +4,8 @@ import {
     View,
     Image,
     FlatList,
-    StyleSheet
+    StyleSheet,
+    TouchableWithoutFeedback
 } from 'react-native';
 import { movieOne, movieTwo } from '../../config'
 
@@ -29,6 +30,7 @@ class List extends Component {
             }
         })
     }
+
     /**
      * @param {*} item posición del vector
      * @returns el componente Image una imagen
@@ -36,10 +38,12 @@ class List extends Component {
      */
     _renderItem(item) {
         return (
-            <Image
-                style={styles.imagen}
-                source={{ uri: item.image }}
-            />
+            <TouchableWithoutFeedback onPress={() => this.newPushContent(item)}>
+                <Image
+                    style={styles.imagen}
+                    source={{ uri: item.image }}
+                />
+            </TouchableWithoutFeedback>
         )
     }
     render() {

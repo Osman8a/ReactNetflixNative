@@ -52,6 +52,16 @@ class indexApp extends Component {
                         out: buildStyleInterpolator(NoTransition)
                     }
                 }
+            case 'Details':
+                return {
+                    ...Navigator.SceneConfigs.FloatFromLeft,
+                    gestures: null,
+                    defaultTransitionVelocity: 100,
+                    animationInterpolators: {
+                        into: buildStyleInterpolator(NoTransition),
+                        out: buildStyleInterpolator(NoTransition)
+                    }
+                }
         }
     }
     render() {

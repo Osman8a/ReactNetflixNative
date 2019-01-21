@@ -1,6 +1,10 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView
+} from 'react-native';
 import SideMenu from 'react-native-side-menu';
 import List from './List';
 import Slide from './Slider'

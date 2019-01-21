@@ -9,7 +9,7 @@ const movieTwo = [
           "year":2011,
           "season":7,
           "thumbnail":"https://static.tvmaze.com/uploads/images/original_untouched/70/176097.jpg",
-          "description":"Suits delves into the fast-paced, high-stakes world of a top Manhattan corporate law firm where hotshot associate Harvey Specter makes a risky move by hiring Mike Ross a brilliant but unmotivated college dropout, as his associate. ",
+          "description":"Suits se adentra en el acelerado y agitado mundo de una importante firma de abogados de Manhattan donde Harvey Specter, un socio de primera línea, realiza un movimiento arriesgado al contratar a Mike Ross un abandono universitario brillante pero no motivado, como su asociado.",
           "cast":"Rick Hoffman, Patrick J. Adams, Meghan Markle, Gabriel Macht, Sarah Rafferty",
           "creator":"Aaron Korsh",
           "episodes": [
