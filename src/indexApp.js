@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Navigator } from 'react-native-deprecated-custom-components';
-import Search from './src/Search';
-import App from './src/App';
-import Details from './src/Details';
+import Search from './components/Search';
+import App from './App';
+import Details from './components/Details';
 import buildStyleInterpolator from 'buildStyleInterpolator';
 
 const NoTransition = {

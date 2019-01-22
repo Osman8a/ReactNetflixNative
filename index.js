@@ -1,6 +1,6 @@
 
 import { AppRegistry } from 'react-native';
-import indexApp from './components/indexApp';
+import indexApp from './src/indexApp';
 import { name as appName } from './app.json';
 
 
