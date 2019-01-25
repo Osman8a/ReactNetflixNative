@@ -4,6 +4,7 @@ import Search from './components/Search';
 import App from './App';
 import Details from './components/Details';
 import buildStyleInterpolator from 'buildStyleInterpolator';
+import Video from './components/videoPlayerView';
 
 const NoTransition = {
     opacity: {
@@ -37,6 +38,10 @@ class indexApp extends Component {
                 return (
                     <Details {...navigator} {...route.passProps} />
                 )
+            case 'Video':
+                return (
+                    <Video {...navigator} {...route.passProps} />
+                )
         }
     }
 
@@ -53,6 +58,16 @@ class indexApp extends Component {
                     }
                 }
             case 'Details':
+                return {
+                    ...Navigator.SceneConfigs.FloatFromLeft,
+                    gestures: null,
+                    defaultTransitionVelocity: 100,
+                    animationInterpolators: {
+                        into: buildStyleInterpolator(NoTransition),
+                        out: buildStyleInterpolator(NoTransition)
+                    }
+                }
+            case 'Video':
                 return {
                     ...Navigator.SceneConfigs.FloatFromLeft,
                     gestures: null,

@@ -6,78 +6,139 @@ import {
     ImageBackground,
     ScrollView,
     StyleSheet,
-    Dimensions
+    Dimensions,
+    Share
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import TabsEpisodes from './TabsEpisodes';
+import * as Animatable from 'react-native-animatable';
 import TextGradient from 'react-native-linear-gradient';
+import Orientation from 'react-native-orientation';
+
+
 
 const { width, height } = Dimensions.get('window');
 
+
+
 class Details extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            measures: 0
+        }
+    }
+
+    UNSAFE_componentWillMount() {
+        Orientation.lockToPortrait();
+    }
+
+    openVideo() {
+        const { name } = this.props.item
+
+        Orientation.lockToLandscape();
+        this.props.navigator.push({
+            ident: 'Video',
+            passProps: {
+                title: name
+            }
+        })
+    }
+
+    onShare({ name }) {
+        Share.share({
+            title: `${name}`,
+            url: 'www.youtube.com',
+            message: `Una increible película para tí llamada ${name}`
+        }, {
+                dialogTitle: 'Compartir este increíble contenido'
+            })
+    }
+
+    handleScroll(event) {
+        if (event.nativeEvent.contentOffset.y > this.state.measure) {
+            this.setState({
+                animation: 'slideInDown'
+            })
+        }
+    }
     render() {
         const { episodes } = this.props.item.details
         const { name } = this.props.item
         const { thumbnail, cast, description, year, creator, numOfEpisodes, season } = this.props.item.details
         return (
-            <ScrollView style={styles.container}>
-                <ImageBackground
-                    style={styles.thumbnail}
-                    source={{ uri: thumbnail }}
-                >
-                    <View style={styles.buttonPlay}>
-                        <TouchableWithoutFeedback onPress={null}>
-                            <View>
+            <View style={{ flex: 1 }}>
+                <Animatable.View>
+                    <Text>{name}</Text>
+                </Animatable.View>
+                <ScrollView onScroll={this.handleScroll.bind(this)} style={styles.container}>
+                    <ImageBackground
+                        style={styles.thumbnail}
+                        source={{ uri: thumbnail }}
+                    >
+                        <View style={styles.buttonPlay}>
+                            <TouchableWithoutFeedback onPress={() => this.openVideo}>
+                                <View>
+                                    <Icon
+                                        style={styles.iconPlay}
+                                        name="play-circle"
+                                        size={90}
+                                        color="white"
+                                    />
+                                </View>
+                            </TouchableWithoutFeedback>
+                        </View>
+                        <View style={styles.nameContainer}
+                            onLayout={({ nativeEvent }) => {
+                                this.setState({
+                                    measures: nativeEvent.layout.y
+                                })
+                            }}
+                        >
+                            <TextGradient colors={['transparent', '#181818', '#181818']}>
+                                <Text style={[styles.text, styles.titleShow]}>{name}</Text>
+                            </TextGradient>
+                        </View>
+                    </ImageBackground>
+                    <View style={styles.descriptionContainer}>
+                        <View style={styles.subtitle}>
+                            <Text style={[styles.text, styles.subTitleText]}>{year}</Text>
+                            <Text style={[styles.text, styles.subTitleText]}>{numOfEpisodes}</Text>
+                            <Text style={[styles.text, styles.subTitleText]}>{season} Temporadas</Text>
+                        </View>
+                    </View>
+                    <View style={styles.description}>
+                        <Text style={[styles.text, styles.light]}>{description}</Text>
+                    </View>
+                    <Text style={[styles.text]}>Emisión: {cast}</Text>
+                    <Text style={[styles.text]}>Creador: {creator}</Text>
+                    <View style={styles.shareListIcons}>
+                        <View style={styles.myListIcon}>
+                            <IonIcons
+                                style={styles.listIcon}
+                                color="gray"
+                                name="md-checkmark"
+                                size={25}
+                            />
+                            <Text style={[styles.text]}>Mi Lista</Text>
+                        </View>
+                        <TouchableWithoutFeedback onPress={() => this.onShare(this.props.item)}>
+                            <View style={styles.myShareIcon}>
                                 <Icon
-                                    style={styles.iconPlay}
-                                    name="play-circle"
-                                    size={90}
-                                    color="white"
+                                    style={styles.shareIcon}
+                                    name="share-alt"
+                                    color="gray"
+                                    size={25}
                                 />
+                                <Text style={[styles.text]}>Compartir</Text>
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
-                    <View style={styles.nameContainer}>
-                        <TextGradient colors={['transparent', '#181818', '#181818']}>
-                            <Text style={styles.text, styles.titleShow}>{name}</Text>
-                        </TextGradient>
-                    </View>
-                </ImageBackground>
-            <View style={styles.descriptionContainer}>
-                <View style={styles.subtitle}>
-                    <Text style={[styles.text, styles.subTitleText]}>{year}</Text>
-                    <Text style={[styles.text, styles.subTitleText]}>{numOfEpisodes}</Text>
-                    <Text style={[styles.text, styles.subTitleText]}>{season} Temporadas</Text>
-                </View>
+                    <TabsEpisodes data={episodes} />
+                </ScrollView>
             </View>
-            <View style={styles.description}>
-                <Text style={[styles.text, styles.light]}>{description}</Text>
-            </View>
-            <Text style={[styles.text]}>Emisión: {cast}</Text>
-            <Text style={[styles.text]}>Creador: {creator}</Text>
-            <View style={styles.shareListIcons}>
-                <View style={styles.myListIcon}>
-                    <IonIcons
-                        style={styles.listIcon}
-                        color="gray"
-                        name="md-checkmark"
-                        size={25}
-                    />
-                    <Text style={[styles.text]}>Mi Lista</Text>
-                </View>
-                <View style={styles.myShareIcon}>
-                    <Icon
-                        style={styles.shareIcon}
-                        name="share-alt"
-                        color="gray"
-                        size={25}
-                    />
-                    <Text style={[styles.text]}>Compartir</Text>
-                </View>
-            </View>
-            <TabsEpisodes data={episodes} />
-            </ScrollView >
         )
     }
 }

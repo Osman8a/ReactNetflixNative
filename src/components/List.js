@@ -7,6 +7,7 @@ import {
     StyleSheet,
     TouchableWithoutFeedback
 } from 'react-native';
+import Orientation from 'react-native-orientation';
 import { movieOne, movieTwo } from '../../config'
 
 /**
@@ -14,6 +15,10 @@ import { movieOne, movieTwo } from '../../config'
  * @extends {Component}
  */
 class List extends Component {
+
+    UNSAFE_componentWillMount() {
+        Orientation.lockToPortrait();
+    }
 
     /**
      *
