@@ -8,7 +8,7 @@ import {
     TouchableWithoutFeedback
 } from 'react-native';
 import Orientation from 'react-native-orientation';
-import { movieOne, movieTwo } from '../../config'
+import { getTwoItems } from '../api/api'
 
 /**
  * @class List muestra las dos listas horizontales
@@ -61,7 +61,7 @@ class List extends Component {
                         ItemSeparatorComponent={() => <View style={styles.separator} />}
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => this._renderItem(item)}
-                        data={movieOne}
+                        data={getTwoItems[0]}
                     />
                 </View>
                 <View>
@@ -71,7 +71,7 @@ class List extends Component {
                         ItemSeparatorComponent={() => <View style={styles.separator} />} //separador
                         keyExtractor={(item) => item.id} //key
                         renderItem={({ item }) => this._renderItem(item)} //renderiza los elementos
-                        data={movieTwo.reverse()} //el vector a renderizar
+                        data={getTwoItems[1]} //el vector a renderizar
                     />
                 </View>
             </View>

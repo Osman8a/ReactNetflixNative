@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { movieOne } from '../../config';
+import { getAll } from '../api/api'
 
 const { width, height } = Dimensions.get('window');
 
@@ -31,7 +32,8 @@ class Search extends Component {
      * @memberof Search
      */
     filter(text) {
-        const newData = movieOne.filter((item) => {
+        const data = getAll();
+        const newData = data.filter((item) => {
             const itemData = item.name.toUpperCase();
             const textData = text.toUpperCase();
             return itemData.indexOf(textData) > -1

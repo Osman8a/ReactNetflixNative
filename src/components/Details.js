@@ -27,7 +27,9 @@ class Details extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            measures: 0
+            measures: 0,
+            header: false,
+            animation: ''
         }
     }
 
@@ -60,7 +62,12 @@ class Details extends Component {
     handleScroll(event) {
         if (event.nativeEvent.contentOffset.y > this.state.measure) {
             this.setState({
+                header: true,
                 animation: 'slideInDown'
+            })
+        } else {
+            this.setState({
+                header: false
             })
         }
     }
@@ -70,9 +77,9 @@ class Details extends Component {
         const { thumbnail, cast, description, year, creator, numOfEpisodes, season } = this.props.item.details
         return (
             <View style={{ flex: 1 }}>
-                <Animatable.View>
-                    <Text>{name}</Text>
-                </Animatable.View>
+                {this.state.header ? <Animatable.View animation={this.state.animation} style={styles.header}>
+                    <Text style={styles.headerText}>{name}</Text>
+                </Animatable.View> : null}
                 <ScrollView onScroll={this.handleScroll.bind(this)} style={styles.container}>
                     <ImageBackground
                         style={styles.thumbnail}
@@ -147,6 +154,20 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#181818'
+    },
+    header: {
+        backgroundColor: '#181818',
+        paddingVertical: 10,
+        alignItems: 'center',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 0
+    },
+    headerText: {
+        color: 'white',
+        fontSize: 20
     },
     nameContainer: {
         backgroundColor: 'transparent'
