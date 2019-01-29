@@ -21,6 +21,10 @@ export default class App extends Component {
     }
   }
 
+  static navigationOptions = {
+    header: null
+  }
+
   /**
    * @function toggle permite
    * abrir y cerrar el menú a
@@ -53,9 +57,9 @@ export default class App extends Component {
           onChange={(isOpen) => this.updateMenu(isOpen)}
         >
           <ScrollView style={[{ flex: 1 }, styles.container]}>
-            <Header navigator={this.props.navigator} toogle={this.toggle.bind(this)} />
+            <Header navigation={this.props.navigation} toogle={this.toggle.bind(this)} />
             <Slide />
-            <List navigator={this.props.navigator} />
+            <List navigation={this.props.navigation} />
           </ScrollView>
         </SideMenu>
       </View>

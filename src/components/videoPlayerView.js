@@ -8,13 +8,18 @@ const { width, height } = Dimensions.get('window')
 
 class videoPlayerView extends Component {
 
+    static navigationOptions = {
+        header: null
+    }
+
     UNSAFE_componentWillMount() {
         Orientation.lockToLandscape();
     }
 
     _back() {
         Orientation.lockToPortrait();
-        this.props.navigator.pop();
+        const { goBack } = this.props.navigation;
+        goBack();
     }
 
     render() {

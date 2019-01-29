@@ -25,6 +25,10 @@ class Search extends Component {
         }
     }
 
+    static navigationOptions = {
+        header: null
+    }
+
     /**
      * @function filter permite filtrar lo que se 
      * busca en el input
@@ -54,15 +58,20 @@ class Search extends Component {
     }
 
     _renderItem(item) {
+        const { navigate } = this.props.navigation
         return (
-            <Image
-                key={item.key}
-                style={styles.image}
-                source={{ uri: item.image }}
-            />
+            <TouchableWithoutFeedback onPress={() => navigate('Details', { item: item })}>
+                <Image
+                    key={item.key}
+                    style={styles.image}
+                    source={{ uri: item.image }}
+                />
+            </TouchableWithoutFeedback>
         )
     }
+
     render() {
+        const { goBack } = this.props.navigation
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -91,7 +100,7 @@ class Search extends Component {
                             />
                         </TouchableWithoutFeedback>
                         : null}
-                    <TouchableWithoutFeedback style={styles.cancelButton} onPress={() => this.props.navigator.pop()}>
+                    <TouchableWithoutFeedback style={styles.cancelButton} onPress={() => goBack()}>
                         <View style={styles.containerButton}>
                             <Text style={styles.cancelButtonText}>Cancelar</Text>
                         </View>

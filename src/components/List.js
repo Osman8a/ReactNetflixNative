@@ -42,8 +42,9 @@ class List extends Component {
      * @memberof List
      */
     _renderItem(item) {
+        const { navigate } = this.props.navigation
         return (
-            <TouchableWithoutFeedback onPress={() => this.newPushContent(item)}>
+            <TouchableWithoutFeedback onPress={() => navigate('Details', { item: item })}>
                 <Image
                     style={styles.imagen}
                     source={{ uri: item.image }}

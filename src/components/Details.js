@@ -33,20 +33,12 @@ class Details extends Component {
         }
     }
 
-    UNSAFE_componentWillMount() {
-        Orientation.lockToPortrait();
+    static navigationOptions = {
+        header: null
     }
 
-    openVideo() {
-        const { name } = this.props.item
-
-        Orientation.lockToLandscape();
-        this.props.navigator.push({
-            ident: 'Video',
-            passProps: {
-                title: name
-            }
-        })
+    UNSAFE_componentWillMount() {
+        Orientation.lockToPortrait();
     }
 
     onShare({ name }) {
@@ -72,9 +64,11 @@ class Details extends Component {
         }
     }
     render() {
-        const { episodes } = this.props.item.details
-        const { name } = this.props.item
-        const { thumbnail, cast, description, year, creator, numOfEpisodes, season } = this.props.item.details
+        const { navigate } = this.props.navigation
+        const { params } = this.props.navigation.state
+        const { episodes } = params.item.details
+        const { name } = params.item
+        const { thumbnail, cast, description, year, creator, numOfEpisodes, season } = params.item.details
         return (
             <View style={{ flex: 1 }}>
                 {this.state.header ? <Animatable.View animation={this.state.animation} style={styles.header}>
@@ -86,7 +80,7 @@ class Details extends Component {
                         source={{ uri: thumbnail }}
                     >
                         <View style={styles.buttonPlay}>
-                            <TouchableWithoutFeedback onPress={() => this.openVideo}>
+                            <TouchableWithoutFeedback onPress={() => navigate('Video', { name: name })}>
                                 <View>
                                     <Icon
                                         style={styles.iconPlay}
