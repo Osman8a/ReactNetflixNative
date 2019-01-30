@@ -11,7 +11,6 @@ import {
     Image
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { movieOne } from '../../config';
 import { getAll } from '../api/api'
 
 const { width, height } = Dimensions.get('window');
