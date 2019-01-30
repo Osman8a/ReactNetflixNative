@@ -7,28 +7,28 @@ class Episodes extends Component {
 
     renderEpisodes() {
         const res = this.props.episodes.map((item, i) => {
-            const img = item.img == null ? 'https://static.tvmaze.com/uploads/images/medium_landscape/76/190262.jpg' : item.image.medium
+            const { medium } = item.image == null ? 'https://static.tvmaze.com/uploads/images/medium_landscape/76/190262.jpg' : item.image
             return (
                 <View style={styles.video} key={i}>
                     <View style={styles.videoEpisode}>
-                        <ImageBackground style={styles.image} source={{uri:img}}>
-                                <View style={styles.buttonPlay}>
-                                    <TouchableWithoutFeedback>
-                                        <View style={{backgroundColor:'transparent'}}>
-                                            <Icon
-                                                style={styles.iconPlay}
-                                                name="play-circle"
-                                                size={30}
-                                                color="white"
-                                            />
-                                        </View>
-                                    </TouchableWithoutFeedback>
-                                </View>
-                            </ImageBackground>
-                            <View style={styles.episodeName}>
-                                <Text style={styles.text}>{item.number}. {item.name}</Text>
-                                <Text style={styles.text}>{item.runtime}</Text>
+                        <ImageBackground style={styles.image} source={{ uri: medium }}>
+                            <View style={styles.buttonPlay}>
+                                <TouchableWithoutFeedback>
+                                    <View style={{ backgroundColor: 'transparent' }}>
+                                        <Icon
+                                            style={styles.iconPlay}
+                                            name="play-circle"
+                                            size={30}
+                                            color="white"
+                                        />
+                                    </View>
+                                </TouchableWithoutFeedback>
                             </View>
+                        </ImageBackground>
+                        <View style={styles.episodeName}>
+                            <Text style={styles.text}>{item.number}. {item.name}</Text>
+                            <Text style={styles.text}>{item.runtime}</Text>
+                        </View>
                     </View>
                     <Text style={styles.summary}>{item.summary}</Text>
                 </View>
@@ -51,26 +51,26 @@ const styles = StyleSheet.create({
         flex: 1,
         marginHorizontal: 10
     },
-    image:{
+    image: {
         width: 150,
-        height:80,
+        height: 80,
         marginRight: 10
     },
-    buttonPlay:{
+    buttonPlay: {
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1
     },
-    episodeName:{
+    episodeName: {
         justifyContent: 'center'
     },
-    videoEpisode:{
-        flexDirection:'row'
+    videoEpisode: {
+        flexDirection: 'row'
     },
-    text:{
+    text: {
         color: 'white'
     },
-    summary:{
+    summary: {
         color: 'gray',
         marginVertical: 10
     }
